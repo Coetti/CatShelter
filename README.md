@@ -18,8 +18,8 @@ CatShelter Management Application
 
 
 ## To Do
-|ID    | Descrição da tarefa| Prioridade |
-|------|-----------------------------------------|----|
+| ID | Descrição da tarefa| Prioridade |
+|---------|-----------------------------------------|----|
 |TD-01| O sistema deverá permitir login com os campos: nome e senha para restrição de acesso de usuários; | ALTA |
 |TD-02| O sistema terá uma tela inicial contendo o menu para acessar as funções do programa | ALTA |
 |TD-03| O sistema devera ter um CRUD para cadastro dos animais  | ALTA |
