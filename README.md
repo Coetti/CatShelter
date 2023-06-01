@@ -2,12 +2,12 @@
 - Gabriel Henrique Coetti
 
 # CatShelter
-CatShelter Management Application 
+- CatShelter Management Application 
 
-## About
-`PPC-CC: PUC Poços de Caldas - Ciência da Computação`
-`Disciplina: Laboratório de AED II`
-`2023 - Semestre 02`
+## Sobre
+- PPC-CC: PUC Poços de Caldas - Ciência da Computação
+- Disciplina: Laboratório de AED II
+- 2023 - Semestre 02
 
 ## Professores
 - Claudio Correa
@@ -16,7 +16,9 @@ CatShelter Management Application
 - Espaço em disco para armazenar os arquivos
 - Biblioteca libPNG
 
-
+## Instruções de uso do código
+ - O usuário deverá compilar o código para gerar o arquivo executável .exe e então executar o aplicativo para que seja aberta a tela de uso do app. Onde ele terá acesso aos menus e ferramentas oferecidas pela aplicação.
+ 
 ## To Do
 | ID | Descrição da tarefa| Prioridade |
 |---------|-----------------------------------------|----|
@@ -35,7 +37,3 @@ CatShelter Management Application
 |TD-13| O sistema deverá ter um relatório das doações | MÉDIA |
 |TD-14| O sistema deverá ser navegável com o mouse | BAIXA |
 |TD-15| O sistema deverá gerar e gravar arquivos .txt dos relatórios para armazenamento | ALTA |
-
-## Código
-
-<li><a href="src/README.md"> Código Fonte</a></li>
