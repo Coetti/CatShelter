@@ -27,7 +27,7 @@
 
 ## To Do
 
-| To Do | Descrição da tarefa | Prioridade |
+| ToDo | Descrição da tarefa | Prioridade |
 |:-----:|:------------------:|:----------:|
 | 01 | O sistema deverá permitir login com os campos: nome e senha para restrição de acesso de usuários | ALTA |
 | 02 | O sistema terá uma tela inicial contendo o menu para acessar as funções do programa | ALTA |
