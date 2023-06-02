@@ -1,25 +1,32 @@
-# Autores
+# CatShelter
+
+- CatShelter Management Application
+
+## Autores
+
 - Gabriel Henrique Coetti
 
-# CatShelter
-- CatShelter Management Application 
-
 ## Sobre
+
 - PPC-CC: PUC Poços de Caldas - Ciência da Computação
 - Disciplina: Laboratório de AED II
 - 2023 - Semestre 02
 
 ## Professores
+
 - Claudio Correa
 
-## Requisitos 
+## Requisitos
+
 - Espaço em disco para armazenar os arquivos
 - Biblioteca libPNG
 
 ## Instruções de uso do código
- - O usuário deverá compilar o código para gerar o arquivo executável .exe e então executar o aplicativo para que seja aberta a tela de uso do app. Onde ele terá acesso aos menus e ferramentas oferecidas pela aplicação.
- 
+
+- O usuário deverá compilar o código para gerar o arquivo executável .exe e então executar o aplicativo para que seja aberta a tela de uso do app. Onde ele terá acesso aos menus e ferramentas oferecidas pela aplicação.
+
 ## To Do
+
 | ID | Descrição da tarefa| Prioridade |
 |---------|-----------------------------------------|----|
 |TD-01| O sistema deverá permitir login com os campos: nome e senha para restrição de acesso de usuários; | ALTA |
