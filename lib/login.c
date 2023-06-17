@@ -7,33 +7,32 @@ void login(){
     char username[60];
     char password[60];
     int max_tentativas = 0;
-    int role;
+    unsigned int role=100;
 
-    printf("USER: ");
-    gets(username);
+   do{  
+        printf("\033[2J");
+        printf("\033[1;1H");
 
-    printf("\n\nPASSWORD: ");
-    gets(password);
-
-    while((role = verificaLogin(username,password)) == 0 && max_tentativas < 5){
-        //printf("\033[2J");
-        //printf("\033[1;1H");  
-
-        printf("Login invalido\nDigite Novamente");
-
+        if(role==0)  
+            printf("Login invalido!!!\n\nDigite Novamente\n\n");
+        
         printf("USER: ");
-        gets(username);
+        scanf("%s", username);
 
         printf("\n\nPASSWORD: ");
-        gets(password);
+        scanf("%s",  password);
 
         max_tentativas++;
-    }
+        
+   }while((role = verificaLogin(username,password)) == 0 && max_tentativas < 5);
+
     if(role == 2)
         adminPanel();
     if(role == 1)
         menu();
-
+    
+    printf("\n\nTentativas maximas atingidas...Saindo!!!");
+    exit(0);
 }
 
 
@@ -47,11 +46,8 @@ int verificaLogin(char *username, char *password){
     char linha[120];
     char admin[20] = "adminadmin"; 
 
-    printf("USER %s, PASSWORD %s",username, password);
     strcpy(user, username);
     strcat(user, password);
-    printf("username concat %s", user);
-
 
     f = fopen(filename, "r+");
     if (f == NULL) {

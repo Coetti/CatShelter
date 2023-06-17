@@ -9,7 +9,7 @@ LOCAL: PUCMINAS - POCOS DE CALDAS*/
 
 //definicoes e prototipos
 void login();
-int verificaLogin(char,char);
+int verificaLogin(char *, char *);
 void adminPanel();
 void menu();
 #endif
