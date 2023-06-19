@@ -1,13 +1,60 @@
+/* IMPLEMENTACAO DO ARQUIVO HEADER DA BIBLIOTECA MENU
+AUTOR: GABRIEL HENRIQUE COETTI
+DATA: 19/06/23
+LOCAL: PUCMINAS - POCOS DE CALDAS*/
 #include <stdio.h>
+#include <stdlib.h>
+#include "catshelter.h"
+#include "gatos.h"
 
-void menu(){
+void limpaTela(){
+    printf("\033[2J");
+    printf("\033[H");
+}
+
+void desenhaGato(){
+    printf(" /\\_/\\\n");
+    printf("( o.o )\n");
+    printf(" > ^ <    __\n");
+    printf("/     \\  /  \\ \n");
+    printf("\\     /_/  \n");
+}
+
+void menu(ListaCDE* lista){
     unsigned int opc;
+    limpaTela();
+    printf("-----------------------------------\n");
+    desenhaGato();
+    printf("\nSelecione uma opcao:\n");
+    printf("1 - Gatos\n");
+    printf("2 - Doacoes\n");
+    printf("3 - Adocoes\n");
+    printf("4 - Sair\n");
+    printf("Opcao: ");
+    scanf("%u", &opc);
 
-    printf("\n\nteste menu\n");
-    scanf("%d", &opc);
+    do{ 
+        switch(opc){
+            case 1:  
+                menuGato(lista);
+                break;
+            case 2:  
+                menuGato(lista);
+                break;
+            case 3:  
+                menuGato(lista);
+                break;
+            case 4:
+                limpaTela();
+                printf("----------------------\n");
+                desenhaGato(); 
+                printf("\nEncerrando o programa.\n");
+                exit(0);
+                /*IMPLEMENTAR A FUNCAO PARA LIBERAR A MEMORIA*/         
+            default:
+            printf("Opcao invalida. Tente novamente.\n");
+                break;    
+        }
+    }while (opc != 6);        
+}
 
-    switch(opc){
-        case 1:  menuGatos();
-            break;
-    }
-}    

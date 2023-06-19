@@ -1,0 +1,26 @@
+[
+{
+  "directory": "C:/CatShelter/build",
+  "command": "gcc  @CMakeFiles/catshelter.dir/includes_C.rsp  -Wall -g -Wall -Wextra -pedantic -o CMakeFiles\\catshelter.dir\\src\\main.c.obj -c C:\\CatShelter\\src\\main.c",
+  "file": "C:/CatShelter/src/main.c",
+  "output": "CMakeFiles/catshelter.dir/src/main.c.obj"
+},
+{
+  "directory": "C:/CatShelter/build",
+  "command": "gcc  @CMakeFiles/catshelter.dir/includes_C.rsp  -Wall -g -Wall -Wextra -pedantic -o CMakeFiles\\catshelter.dir\\lib\\menu.c.obj -c C:\\CatShelter\\lib\\menu.c",
+  "file": "C:/CatShelter/lib/menu.c",
+  "output": "CMakeFiles/catshelter.dir/lib/menu.c.obj"
+},
+{
+  "directory": "C:/CatShelter/build",
+  "command": "gcc  @CMakeFiles/catshelter.dir/includes_C.rsp  -Wall -g -Wall -Wextra -pedantic -o CMakeFiles\\catshelter.dir\\lib\\gatos.c.obj -c C:\\CatShelter\\lib\\gatos.c",
+  "file": "C:/CatShelter/lib/gatos.c",
+  "output": "CMakeFiles/catshelter.dir/lib/gatos.c.obj"
+},
+{
+  "directory": "C:/CatShelter/build",
+  "command": "gcc  @CMakeFiles/catshelter.dir/includes_C.rsp  -Wall -g -Wall -Wextra -pedantic -o CMakeFiles\\catshelter.dir\\lib\\listacde.c.obj -c C:\\CatShelter\\lib\\listacde.c",
+  "file": "C:/CatShelter/lib/listacde.c",
+  "output": "CMakeFiles/catshelter.dir/lib/listacde.c.obj"
+}
+]
