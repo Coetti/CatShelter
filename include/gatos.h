@@ -9,11 +9,12 @@ typedef struct Gato {
 
     unsigned int id;
     char nome[50];
-    char adocao[4];
+    char adocao;
     unsigned int idade;
     char raca[30];
     char pelagem[30];
-    char vacinas[30][30];
+    int numVacinas;
+    char vacinas[10][30];
     char castrado;
     char comorbidades[100];
     char obs[200];

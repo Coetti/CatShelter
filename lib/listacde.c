@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 #include "gatos.h"
 #include "listacde.h"
 
@@ -115,7 +116,7 @@ int insereOrdenado(ListaCDE *l, Gato dados){
     return 1;
 }
 
-int retira(ListaCDE *l, Gato dados){
+int retira(ListaCDE *l, int id){
 
     No *aux;
 
@@ -125,7 +126,7 @@ int retira(ListaCDE *l, Gato dados){
     }
 
     /* 1o caso: lista unitaria */
-    if((dados.id == l->inicio->dados.id) && (l->inicio == l->fim)) {
+    if((id == l->inicio->dados.id) && (l->inicio == l->fim)) {
         aux = l->inicio; // aux aponta para o no que vou remover
         l->inicio = NULL; //inicio aponta pra null
         l->fim = NULL; // fim aponta pra null
@@ -136,7 +137,7 @@ int retira(ListaCDE *l, Gato dados){
     }
 
     /* 2o caso: removendo primeiro elemento */
-    if(dados.id == l->inicio->dados.id) {
+    if(id == l->inicio->dados.id) {
         aux = l->inicio; // aux aponta para o no que vou remover
         l->inicio = aux->prox; //inicio aponta para o novo inicio (o segundo elemento)
         l->inicio->ant = l->fim; // o anterior do novo inicio aponta para o fim
@@ -148,7 +149,7 @@ int retira(ListaCDE *l, Gato dados){
     }
 
     /* 3o caso: removendo ultimo elemento */
-    if(dados.id == l->fim->dados.id) {
+    if(id == l->fim->dados.id) {
         aux = l->fim; // aux aponta para o no que vou remover
         l->fim = aux->ant; //fim aponta para o novo fim (penultimo elemento)
         l->fim->prox = l->inicio; // o proximo do novo fim aponta para o inicio
@@ -163,11 +164,11 @@ int retira(ListaCDE *l, Gato dados){
     aux = l->inicio->prox; // aux aponta para o segundo elemento
 
     //percorro a lista ate achar o elemento, ou chegar no fim
-    while((dados.id != aux->dados.id) && (aux != l->fim))
+    while((id != aux->dados.id) && (aux != l->fim))
         aux = aux->prox;
 
     if(aux == l->fim){ // se cheguei ao fim, nao encontrei o elemento
-        printf("O elemento %d nao esta na lista.\n", dados.id);
+        printf("O elemento %d nao esta na lista.\n", id);
         return 0;
     }
 
@@ -216,17 +217,17 @@ void mostra(ListaCDE *l, int filtro) {
         printf("Lista vazia!\n");
     } else {
         if (filtro == 1) {
-            printf("\nExibindo lista ordenada por ID\n\n");
+            printf("\nExibindo os gatos ordenados por ID\n\n");
             aux = l->inicio;
             do {
                 printf("ID: %d\n",aux->dados.id);
                 printf("Nome: %s\n", aux->dados.nome);
-                printf("Disponivel para adocao?: %s\n", aux->dados.adocao);
+                printf("Disponivel para adocao?: %c\n", aux->dados.adocao);
                 printf("Idade: %d\n", aux->dados.idade);
                 printf("Raca: %s\n",aux->dados.raca);
                 printf("Pelagem: %s\n", aux->dados.pelagem);
-                for (int i = 0; i < 30; i++) {
-                    printf("Vacina: %s\n", aux->dados.vacinas[i]);
+                for (int i = 0; i < aux->dados.numVacinas; i++) {
+                    printf("Vacina %d: %s \n", i+1,aux->dados.vacinas[i]);
                 }
                 printf("Castrado?: %c\n", aux->dados.castrado);
                 printf("Comorbidades: %s\n", aux->dados.comorbidades);
@@ -241,15 +242,15 @@ void mostra(ListaCDE *l, int filtro) {
             printf("\nFiltro disponivel para adocao aplicado! \n\n");
             aux = l->inicio;
             do {
-                if (strcmp(aux->dados.adocao, "SIM") == 0) {
+                if (aux->dados.adocao == 'S') {
                     printf("ID: %d\n", aux->dados.id);
                     printf("Nome: %s\n", aux->dados.nome);
-                    printf("Disponivel para adocao?: %s\n", aux->dados.adocao);
+                    printf("Disponivel para adocao?: %c\n", aux->dados.adocao);
                     printf("Idade: %d\n", aux->dados.idade);
                     printf("Raca: %s\n", aux->dados.raca);
                     printf("Pelagem: %s\n", aux->dados.pelagem);
-                    for (int i = 0; i < 30; i++) {
-                        printf("Vacina: %s\n", aux->dados.vacinas[i]);
+                    for (int i = 0; i < aux->dados.numVacinas; i++) {
+                        printf("Vacina %d: %s\n", i+1,aux->dados.vacinas[i]);
                     }
                     printf("Castrado?: %c\n", aux->dados.castrado);
                     printf("Comorbidades: %s\n", aux->dados.comorbidades);
@@ -264,7 +265,25 @@ void mostra(ListaCDE *l, int filtro) {
     }
 }
 
-Gato* procura(ListaCDE *l, char *nomeProcurado) {
+Gato* procuraNome(ListaCDE *l, char nomeProcurado[]) {
+    No *aux;
+    if (l->inicio == NULL) {
+        printf("Sem gatos registrados!\n");
+        printf(">>>>272");
+    } 
+    aux = l->inicio;
+    do{
+        if(strcmp(aux->dados.nome, nomeProcurado) == 0) {
+            printf(">>>>278");
+            return &(aux->dados);
+        }
+        aux = aux->prox; 
+    }while(aux != l->inicio);
+    printf(">>>>284");
+    return NULL;     
+}   
+
+int procuraID(ListaCDE *l, int id){
     No *aux;
     if (l->inicio == NULL) {
         printf("Sem gatos registrados!\n");
@@ -272,21 +291,85 @@ Gato* procura(ListaCDE *l, char *nomeProcurado) {
         aux = l->inicio;    
         
         while (aux != l->fim) {
-            if (strcmp(aux->dados.nome, nomeProcurado) == 0) {
-                return &(aux->dados);
+            if (id == aux->dados.id) {
+                return 1;
             }
             aux = aux->prox; 
         }
-        printf("\n\nGato com nome %s nao encontrado", nomeProcurado);
-        printf("\n\nPressione qualquer tecla para voltar");
-        getchar();
     }
-        printf("\n\nGato com nome %s nao encontrado",nomeProcurado);
-        printf("\n\nPressione qualquer tecla para voltar");
-        getchar();
-        //pesquisaGato();
-        return 0;
-}   
+    return 0;
+}
+
+int atualiza(ListaCDE *l, int id, int filtro){
+    No *aux;
+    
+    if (l->inicio == NULL) {
+            printf("Sem gatos registrados!\n");
+    }
+
+    aux = l->inicio;
+
+    do{
+        if(id == aux->dados.id){
+            switch (filtro) {
+                case 1:
+                    printf("Digite o novo nome: ");
+                    scanf("%s", aux->dados.nome);
+                    break;
+                case 2:
+                    printf("Digite a nova raca: ");
+                    scanf("%s", aux->dados.raca);
+                    break;
+                case 3:
+                    printf("Digite a nova informacao de adocao (s/n): ");
+                    scanf(" %c", &aux->dados.adocao);
+                    break;
+                case 4:
+                    printf("Digite a nova idade: ");
+                    scanf("%d", &aux->dados.idade);
+                    break;
+                case 5:
+                    printf("Digite a nova pelagem: ");
+                    scanf("%s", aux->dados.pelagem);
+                    break;
+                case 6:
+                    printf("Digite o novo numero de vacinas: ");
+                    scanf("%d", &aux->dados.numVacinas);
+                    for(int i = 0; i<aux->dados.numVacinas; i++){
+                        printf("Digite a vacina %d: ", i+1);
+                        scanf("%s", aux->dados.vacinas[i]);
+                    }
+                    break;
+                case 7:
+                    printf("Digite a nova informacao de castrado (s/n): ");
+                    scanf(" %c", &aux->dados.castrado);
+                    break;
+                case 8:
+                    printf("Digite as novas comorbidades: ");
+                    scanf("%s", aux->dados.comorbidades);
+                    break;
+                case 9:
+                    printf("Digite as novas observacoes: ");
+                    scanf("%s", aux->dados.obs);
+                    break;
+                case 10:
+                    printf("Digite a nova data de entrada: ");
+                    scanf("%s", aux->dados.dataDeEntrada);
+                    break;
+                case 11:
+                    printf("Digite a nova data de adocao: ");
+                    scanf("%s", aux->dados.dataDeAdocao);
+                    break;
+                default:
+                    printf("Opcao invalida.\n");
+                    return 0;
+            }
+            return 1;
+        }
+        aux = aux->prox;
+    }while(aux != l->inicio );
+    return 0;
+}
 
 /*agora inserir na gato.c o menu e a funcao para criar um novo gato para testar a implementacao da lista
 
