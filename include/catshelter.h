@@ -12,4 +12,6 @@ void login();
 int verificaLogin(char *, char *);
 void adminPanel();
 void menu();
+void limpaTela();
+void desenhaGato();
 #endif
