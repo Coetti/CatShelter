@@ -10,12 +10,15 @@ set(SOURCES
     src/main.c
     lib/menu.c
     lib/gatos.c
-    lib/listacde.c  
+    lib/listacde.c 
+    lib/login.c
+    lib/adminpanel.c 
 )
 
 # Adicione os arquivos de header
 set(HEADERS
     include/gatos.h
+    include/catshelter.h
 )
 
 # Adicione o executável principal

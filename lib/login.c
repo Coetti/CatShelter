@@ -1,7 +1,8 @@
+/*IMPLEMENTACAO DO LOGIN*/
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include "header.h"
+#include "catshelter.h"
 
 void login(){
     char username[60];
@@ -40,8 +41,8 @@ void login(){
 /* Verifica se o login do usuario/senha estao corretos */
 
 int verificaLogin(char *username, char *password){
-    char filename[30] = "src/database/users.txt";
-    FILE *f;
+    char filename[100] = "C:\\CatShelter\\database\\users.txt";
+    FILE* f;
     char user[120]; 
     char linha[120];
     char admin[20] = "adminadmin"; 

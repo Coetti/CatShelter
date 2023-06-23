@@ -76,3 +76,24 @@ int getTamanho(ListaCDE l){
 
     return l.tam;
 }
+
+int freeLista(ListaCDE *l){
+    No *aux = l->inicio;
+    No *prox;
+
+
+    if(estaVazia(*l) == 1){
+        printf("Nao ha Nos para remover");
+        return 1;
+    }else{
+        while(aux != NULL){
+        prox = aux->prox;
+        free(aux);
+        l->tam--;
+        aux = prox;
+    }
+        l->inicio = NULL;
+        l->fim = NULL;
+        return 0;
+    }
+}
