@@ -13,18 +13,15 @@ void menuGato(ListaCDE* lista) {
     int opcao = 0;
     int filtro = 0;
     unsigned int id;
+    unsigned int novoID;
     char nomeProcurado[50];
     Gato novoGato;
     Gato *gatoProcurado;
     extern Arquivos arq;  // Declare a variável externa para acessá-la
+    getGatos(arq, lista);
     do {
-
         printf("-----------------------------------\n");
-        printf(" /\\_/\\\n");
-        printf("( o.o )\n");
-        printf(" > ^ <    __\n");
-        printf("/     \\  /  \\ \n");
-        printf("\\     /_/  \n");
+        desenhaGato();
         printf("\nSelecione uma opcao:\n");
         printf("1. Cadastrar um novo gato\n");
         printf("2. Mostrar animais cadastrados\n");
@@ -37,19 +34,24 @@ void menuGato(ListaCDE* lista) {
         limpaTela();
         switch (opcao) {
             case 1:
-                novoGato = createGato();
+                novoID = ultimoID(lista);
+                novoGato = createGato(novoID);
                 insereOrdenado(lista, novoGato);
-                abreArquivoGatosEscrever(arq, novoGato);
+                escreverGatos(arq, lista);
+                
                 break;
             case 2:
-                if(!estaVazia(*lista)){
+                if(estaVazia(*lista)){
+                printf("\n-------------------------------------------------\n");
+                printf("\nNao ha registros para serem exibidos\n");
+                pressioneParaVoltar();
+            }
+            else{
                 printf("\n-------------------------------------------------\n");
                 printf("1 = Ordenada por ID  / / / 2 = Animais disponiveis para adocao \n");
                 scanf("%d", &filtro);
                 mostra(lista, filtro);
-            }
-            else{
-                printf("Nao ha registros para serem exibidos");
+                pressioneParaVoltar();
             }
             break;
             case 3:
@@ -64,98 +66,138 @@ void menuGato(ListaCDE* lista) {
                 }else{
                     printf("Gato com nome %s nao encontrado!!!", nomeProcurado);
                 }
+                pressioneParaVoltar();
                 break;
             case 4: 
                 printf("\nDigite o ID do gato que deseja atualizar: ");
                 scanf("%u", &id);
-                if(!procuraID(lista, id)){
-                    printf("1 - Nome /// 2 - Raaa /// 3 - Adocao /// 4 - Idade");
-                    printf("5 - Pelagem /// 6 - Vacinas /// 7 - Castrado ");
+                if(procuraID(lista, id) == 1){
+                    printf("1 - Nome /// 2 - Raca /// 3 - Adocao /// 4 - Idade /// ");
+                    printf("5 - Pelagem /// 6 - Vacinas /// 7 - Castrado /// ");
                     printf("8 - Comorbidades /// 9 - Observação /// 10 - Data de Entrada /// 11 - Data de Adocao\n");
                     printf("Escolha o campo que deseja atualizar\n");
                     scanf("%d", &filtro);
-                    if(!atualiza(lista, id, filtro)){
+                    if(atualiza(lista, id, filtro)){
                         printf("Dados atualizados com sucesso!");
+                        escreverGatos(arq, lista);
                     }
-                }else{
+                }
+                else{
                     printf("ID nao encontrado!!!");
                 }
+                pressioneParaVoltar();
                 break;
             case 5:
                 printf("\nDigite o ID do gato que deseja remover: ");
                 scanf("%u", &id);
                 if(retira(lista, id) == 1){
                     printf("Gato com id: %u excluido com sucesso", id);
+                    escreverGatos(arq, lista);
                 }else{
                     printf("Gato com id %u nao encontrado!!!",id);
                 }
+                pressioneParaVoltar();
                 break;
             case 6:
                 menu();
                 break;
             default:
                 printf("Opcao invalida. Tente novamente.\n");
+                pressioneParaVoltar();
                 break;
         }
     } while (opcao != 6);
 }
 
 
-Gato createGato(){
+Gato createGato(unsigned int novoID){
     Gato novoGato;
+    
+    novoGato.id = novoID + 1;
+
     limpaTela();
-    printf("Digite os dados do gato:\n");
-    printf("ID: ");
-    scanf("%u", &novoGato.id);
+    printf("-----------------------------------------\n");
+    printf("REGISTRANDO GATO DE ID >>>%u<<<\n", novoGato.id);
+    printf("Preencha os dados do novo gato\n\n");
+    getchar();
+
     printf("Nome: ");
-    scanf("%s", novoGato.nome);
+    fgets(novoGato.nome, sizeof(novoGato.nome), stdin);
+    novoGato.nome[strcspn(novoGato.nome, "\n")] = '\0'; // Remover o caractere de nova linha
+
     for (int i = 0; novoGato.nome[i] != '\0'; i++) {
         novoGato.nome[i] = toupper(novoGato.nome[i]);
     }
+
     printf("Disponivel para adocao (S/N): ");
     scanf(" %c", &novoGato.adocao);
-    getchar();
+    getchar(); // Limpar o caractere de nova linha do buffer de entrada
+
     novoGato.adocao = toupper(novoGato.adocao);
+
     printf("Idade: ");
     scanf("%u", &novoGato.idade);
+    getchar(); // Limpar o caractere de nova linha do buffer de entrada
+
     printf("Raca: ");
-    scanf("%s", novoGato.raca);
-    getchar();
+    fgets(novoGato.raca, sizeof(novoGato.raca), stdin);
+    novoGato.raca[strcspn(novoGato.raca, "\n")] = '\0'; // Remover o caractere de nova linha
+
     for (int i = 0; novoGato.raca[i] != '\0'; i++) {
         novoGato.raca[i] = toupper(novoGato.raca[i]);
     }
+
     printf("Pelagem: ");
-    scanf("%s", novoGato.pelagem);
-    getchar();
+    fgets(novoGato.pelagem, sizeof(novoGato.pelagem), stdin);
+    novoGato.pelagem[strcspn(novoGato.pelagem, "\n")] = '\0'; // Remover o caractere de nova linha
+
     for (int i = 0; novoGato.pelagem[i] != '\0'; i++) {
         novoGato.pelagem[i] = toupper(novoGato.pelagem[i]);
     }
+
     printf("Digite o numero de vacinas: ");
     scanf("%d", &novoGato.numVacinas);
-    for(int i = 0; i<novoGato.numVacinas; i++){
+    getchar(); // Limpar o caractere de nova linha do buffer de entrada
+
+    for(int i = 0; i < novoGato.numVacinas; i++){
         printf("Digite a vacina %d: ", i+1);
-        scanf("%s", novoGato.vacinas[i]);
+        fgets(novoGato.vacinas[i], sizeof(novoGato.vacinas[i]), stdin);
+        novoGato.vacinas[i][strcspn(novoGato.vacinas[i], "\n")] = '\0'; // Remover o caractere de nova linha
     }
+
     printf("Castrado (S/N): ");
     scanf(" %c", &novoGato.castrado);
-    getchar();
+    getchar(); // Limpar o caractere de nova linha do buffer de entrada
+
     novoGato.castrado = toupper(novoGato.castrado);
+
     printf("Comorbidades: ");
-    scanf("%s", novoGato.comorbidades);
+    fgets(novoGato.comorbidades, sizeof(novoGato.comorbidades), stdin);
+    novoGato.comorbidades[strcspn(novoGato.comorbidades, "\n")] = '\0'; // Remover o caractere de nova linha
+
     for (int i = 0; novoGato.comorbidades[i] != '\0'; i++) {
         novoGato.comorbidades[i] = toupper(novoGato.comorbidades[i]);
     }
+
     printf("Observacao: ");
-    scanf("%s", novoGato.obs);
+    fgets(novoGato.obs, sizeof(novoGato.obs), stdin);
+    novoGato.obs[strcspn(novoGato.obs, "\n")] = '\0'; // Remover o caractere de nova linha
+
     for (int i = 0; novoGato.obs[i] != '\0'; i++) {
         novoGato.obs[i] = toupper(novoGato.obs[i]);
     }
+
     printf("No abrigo desde: ");
-    scanf("%s", novoGato.dataDeEntrada);
+    fgets(novoGato.dataDeEntrada, sizeof(novoGato.dataDeEntrada), stdin);
+    novoGato.dataDeEntrada[strcspn(novoGato.dataDeEntrada, "\n")] = '\0'; // Remover o caractere de nova linha
+
     printf("Adotado em: ");
-    scanf("%s", novoGato.dataDeAdocao);
+    fgets(novoGato.dataDeAdocao, sizeof(novoGato.dataDeAdocao), stdin);
+    novoGato.dataDeAdocao[strcspn(novoGato.dataDeAdocao, "\n")] = '\0'; // Remover o caractere de nova linha
+
     return novoGato;
 }
+
 
 void exibeGato(Gato gatoMostrado){
     printf("ID: %u\n", gatoMostrado.id);
@@ -358,16 +400,17 @@ int procuraID(ListaCDE *l, unsigned int id){
     No *aux;
     if (l->inicio == NULL) {
         printf("\nSem gatos registrados!\n");
-    } else {
-        aux = l->inicio;    
-        
-        while (aux != l->fim) {
-            if (id == aux->dados.id) {
-                return 1;
-            }
-            aux = aux->prox; 
-        }
+        return 0;
     }
+    aux = l->inicio;    
+    
+    do{
+        if (id == aux->dados.id) {
+            return 1;
+        }
+        aux = aux->prox; 
+    }while(aux != l->inicio);
+
     return 0;
 }
 
@@ -375,7 +418,7 @@ int atualiza(ListaCDE *l, unsigned int id, int filtro){
     No *aux;
     
     if (l->inicio == NULL) {
-            printf("\nSem gatos registrados!\n");
+        printf("\nSem gatos registrados!\n");
     }
 
     aux = l->inicio;
@@ -386,15 +429,25 @@ int atualiza(ListaCDE *l, unsigned int id, int filtro){
             switch (filtro) {
                 case 1:
                     printf("Digite o novo nome: ");
-                    scanf("%s", aux->dados.nome);
+                    fgets(aux->dados.nome, sizeof(aux->dados.nome), stdin);
+                    aux->dados.nome[strcspn(aux->dados.nome, "\n")] = '\0';
+                    for (int i = 0; aux->dados.nome[i] != '\0'; i++) {
+                        aux->dados.nome[i] = toupper(aux->dados.nome[i]);
+                    }
                     break;
                 case 2:
                     printf("Digite a nova raca: ");
-                    scanf("%s", aux->dados.raca);
+                    fgets(aux->dados.raca, sizeof(aux->dados.raca), stdin);
+                    aux->dados.raca[strcspn(aux->dados.raca, "\n")] = '\0';
+                    for (int i = 0; aux->dados.raca[i] != '\0'; i++) {
+                        aux->dados.raca[i] = toupper(aux->dados.raca[i]);
+                    }
                     break;
                 case 3:
-                    printf("Digite a nova informacao de adocao (s/n): ");
+                    printf("Digite a nova informação de adocao (s/n): ");
                     scanf(" %c", &aux->dados.adocao);
+                    getchar(); 
+                    aux->dados.adocao = toupper(aux->dados.adocao);
                     break;
                 case 4:
                     printf("Digite a nova idade: ");
@@ -402,51 +455,73 @@ int atualiza(ListaCDE *l, unsigned int id, int filtro){
                     break;
                 case 5:
                     printf("Digite a nova pelagem: ");
-                    scanf("%s", aux->dados.pelagem);
+                    fgets(aux->dados.pelagem, sizeof(aux->dados.pelagem), stdin);
+                    aux->dados.pelagem[strcspn(aux->dados.pelagem, "\n")] = '\0'; // Remover o caractere de nova linha
+                    for (int i = 0; aux->dados.pelagem[i] != '\0'; i++) {
+                        aux->dados.pelagem[i] = toupper(aux->dados.pelagem[i]);
+                    }
                     break;
                 case 6:
                     printf("Digite o novo numero de vacinas: ");
                     scanf("%d", &aux->dados.numVacinas);
-                    for(int i = 0; i<aux->dados.numVacinas; i++){
-                        printf("Digite a vacina %d: ", i+1);
-                        scanf("%s", aux->dados.vacinas[i]);
+                    for (int i = 0; i < aux->dados.numVacinas; i++) {
+                        printf("Digite a vacina %d: ", i + 1);
+                        fgets(aux->dados.vacinas[i], sizeof(aux->dados.vacinas[i]), stdin);
                     }
                     break;
                 case 7:
                     printf("Digite a nova informacao de castrado (s/n): ");
                     scanf(" %c", &aux->dados.castrado);
+                    getchar();
+                    aux->dados.castrado = toupper(aux->dados.castrado);
                     break;
                 case 8:
                     printf("Digite as novas comorbidades: ");
-                    scanf("%s", aux->dados.comorbidades);
+                    fgets(aux->dados.comorbidades, sizeof(aux->dados.comorbidades), stdin);
+                    aux->dados.comorbidades[strcspn(aux->dados.comorbidades, "\n")] = '\0';
+                    for (int i = 0; aux->dados.comorbidades[i] != '\0'; i++) {
+                        aux->dados.comorbidades[i] = toupper(aux->dados.comorbidades[i]);
+                    } 
                     break;
                 case 9:
                     printf("Digite as novas observacoes: ");
-                    scanf("%s", aux->dados.obs);
+                    fgets(aux->dados.obs, sizeof(aux->dados.obs), stdin);
+                    aux->dados.obs[strcspn(aux->dados.obs, "\n")] = '\0';
+                    for (int i = 0; aux->dados.obs[i] != '\0'; i++) {
+                        aux->dados.obs[i] = toupper(aux->dados.obs[i]);
+                    } 
                     break;
                 case 10:
                     printf("Digite a nova data de entrada: ");
-                    scanf("%s", aux->dados.dataDeEntrada);
+                    fgets(aux->dados.dataDeEntrada, sizeof(aux->dados.dataDeEntrada), stdin);
                     break;
                 case 11:
                     printf("Digite a nova data de adocao: ");
-                    scanf("%s", aux->dados.dataDeAdocao);
+                    fgets(aux->dados.dataDeAdocao, sizeof(aux->dados.dataDeAdocao), stdin);
                     break;
                 default:
                     printf("Opcao invalida.\n");
-                    return 0;
+                    pressioneParaVoltar();
             }
+
             return 1;
         }
         aux = aux->prox;
-    }while(aux != l->inicio );
+    }while(aux != l->inicio);
+    
     return 0;
 }
+
+unsigned int ultimoID(ListaCDE *l){
+    unsigned int ultimoID = l->fim->dados.id;
+    return ultimoID; 
+}
+
 /*--------------------------------------------FUNCOES RELACIONADAS AOS ARQUIVOS------------------------------------------------------*/
 
 Arquivos arq = {NULL,"C:\\CatShelter\\database\\gatosDB.txt","C:\\CatShelter\\database\\doacoesDB.txt"};
 
-int lerQtdGatos(Arquivos arq){
+/*int lerQtdGatos(Arquivos arq){
     int qtdGatos;
     char qtdGatosLida[10];
 
@@ -462,78 +537,42 @@ int lerQtdGatos(Arquivos arq){
     printf("quantidade lida depois do atoi %d", qtdGatos);
     fclose(arq.f);
     return qtdGatos;
-}
+}*/
 
-Gato abreArquivoGatosLer(Arquivos arq) {
-    Gato gato;
-
-    arq.f = fopen(arq.bancoGatos, "r");
-    if (arq.f == NULL) {
-        printf("Erro ao abrir o arquivo.\n");
-        exit(1);
-    }
-
-    // Ignorar a primeira linha do arquivo
-    char linha[100];
-    fgets(linha, sizeof(linha), arq.f);
-
-    fscanf(arq.f, "%u", &gato.id);
-    fscanf(arq.f, "%s", gato.nome);
-    fscanf(arq.f, " %c", &gato.adocao);
-    fscanf(arq.f, "%u", &gato.idade);
-    fscanf(arq.f, "%s", gato.raca);
-    fscanf(arq.f, "%s", gato.pelagem);
-    fscanf(arq.f, "%d", &gato.numVacinas);
-
-    for (int i = 0; i < gato.numVacinas; i++) {
-        fscanf(arq.f, "%s", gato.vacinas[i]);
-    }
-
-    fscanf(arq.f, " %c", &gato.castrado);
-    fscanf(arq.f, "%s", gato.comorbidades);
-    fscanf(arq.f, "%s", gato.obs);
-    fscanf(arq.f, "%s", gato.dataDeEntrada);
-    fscanf(arq.f, "%s", gato.dataDeAdocao);
-
-    fclose(arq.f);
-    return gato;
-}
-
-Gato* getGatos(ListaCDE *l, Arquivos arq) {
-    int numGatos;
-    numGatos = lerQtdGatos(arq);
-    printf(">>>>numGatos = %d\n", numGatos);
-
-    Gato* gatos = malloc(numGatos * sizeof(Gato));
-    if (gatos == NULL) {
-        printf("Erro ao alocar memória.\n");
-        exit(1);
-    }
+int getGatos(Arquivos arq, ListaCDE *l) {
 
     arq.f = fopen(arq.bancoGatos, "r");
     if (arq.f == NULL) {
         printf("Erro ao abrir o arquivo.\n");
-        exit(1);
+        return 0;
     }
 
-    // Ignorar a primeira linha do arquivo (quantidade de gatos)
-    char linha[100];
-    fgets(linha, sizeof(linha), arq.f);
-
-    for (int i = 0; i < numGatos; i++) {
-        gatos[i] = abreArquivoGatosLer(arq);
+    while (!feof(arq.f)) {
+        Gato gato = abreArquivoGatosLer(arq);
+        insereOrdenado(l, gato);  // Insira o gato na lista ordenadamente
     }
 
     fclose(arq.f);
-
-    for (int i = 0; i < numGatos; i++) {
-        // Imprima os outros campos da estrutura Gato aqui
-        exibeGato(gatos[i]);
-    }
-
-    return gatos;
+    return 1;
 }
 
+void escreverGatos(Arquivos arq, ListaCDE* l){
+    No* aux;
+
+    arq.f = fopen(arq.bancoGatos, "w+");
+    if (arq.f == NULL) {
+        printf("Erro ao abrir o arquivo.\n");
+        exit(1);
+    }
+    aux = l->inicio;
+
+    do{
+        abreArquivoGatosEscrever(arq, aux->dados);
+        aux = aux->prox;
+    }while(aux != l->inicio);
+
+    fclose(arq.f);
+}
 
 void abreArquivoGatosEscrever(Arquivos arq, Gato gato) {
     arq.f = fopen(arq.bancoGatos, "a");
@@ -561,4 +600,28 @@ void abreArquivoGatosEscrever(Arquivos arq, Gato gato) {
     fprintf(arq.f, "%s\n", gato.dataDeAdocao);
 
     fclose(arq.f);
+}
+
+Gato abreArquivoGatosLer(Arquivos arq) {
+    Gato gato;
+
+    fscanf(arq.f, "%u", &gato.id);
+    fscanf(arq.f, "%s", gato.nome);
+    fscanf(arq.f, " %c", &gato.adocao);
+    fscanf(arq.f, "%u", &gato.idade);
+    fscanf(arq.f, "%s", gato.raca);
+    fscanf(arq.f, "%s", gato.pelagem);
+    fscanf(arq.f, "%d", &gato.numVacinas);
+
+    for (int i = 0; i < gato.numVacinas; i++) {
+        fscanf(arq.f, "%s", gato.vacinas[i]);
+    }
+
+    fscanf(arq.f, " %c", &gato.castrado);
+    fscanf(arq.f, "%s", gato.comorbidades);
+    fscanf(arq.f, "%s", gato.obs);
+    fscanf(arq.f, "%s", gato.dataDeEntrada);
+    fscanf(arq.f, "%s", gato.dataDeAdocao);
+
+    return gato;
 }

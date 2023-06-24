@@ -43,7 +43,7 @@ typedef struct Arquivos{
 
 
 void menuGato(ListaCDE *lista);
-Gato createGato();
+Gato createGato(unsigned int novoID);
 int insereOrdenado(ListaCDE *l, Gato dados);
 void exibeGato(Gato);
 void mostra(ListaCDE *l, int filtro);
@@ -51,6 +51,7 @@ Gato* procuraNome(ListaCDE *l, char nomeProcurado[]);
 int procuraID(ListaCDE *l, unsigned int id);
 int retira(ListaCDE *l, unsigned int id);
 int atualiza(ListaCDE *l, unsigned int id, int filtro);
+unsigned int ultimoID(ListaCDE *l);
 
 
 void cria(ListaCDE *l);
@@ -62,9 +63,10 @@ int getTamanho(ListaCDE l);
 int freeLista(ListaCDE *l);
 
 //relacionadas ao arquivo
-int lerQtdGatos(Arquivos arq);
+//int lerQtdGatos(Arquivos arq);
 Gato abreArquivoGatosLer(Arquivos arq);
 void abreArquivoGatosEscrever(Arquivos arq, Gato gato);
-Gato* getGatos(ListaCDE *l, Arquivos arq);
+int getGatos(Arquivos arq, ListaCDE *l);
+void escreverGatos(Arquivos arq, ListaCDE* l);
 
 #endif

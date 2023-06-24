@@ -1163,7 +1163,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "FALSE"
+			"value" : "TRUE"
 		},
 		{
 			"name" : "catshelter_BINARY_DIR",

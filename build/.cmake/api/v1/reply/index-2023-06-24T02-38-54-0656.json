@@ -19,8 +19,8 @@
 			"major" : 3,
 			"minor" : 27,
 			"patch" : 0,
-			"string" : "3.27.0-rc3",
-			"suffix" : "rc3"
+			"string" : "3.27.0-rc2",
+			"suffix" : "rc2"
 		}
 	},
 	"objects" : 
@@ -35,7 +35,7 @@
 			}
 		},
 		{
-			"jsonFile" : "cache-v2-51fac00511133ac6b8fc.json",
+			"jsonFile" : "cache-v2-457868bcb69a30f1e071.json",
 			"kind" : "cache",
 			"version" : 
 			{
@@ -44,7 +44,7 @@
 			}
 		},
 		{
-			"jsonFile" : "cmakeFiles-v1-faf6bbdb2e294852457b.json",
+			"jsonFile" : "cmakeFiles-v1-654e89120261d5a735e9.json",
 			"kind" : "cmakeFiles",
 			"version" : 
 			{
@@ -53,7 +53,7 @@
 			}
 		},
 		{
-			"jsonFile" : "toolchains-v1-ca5f28d50d58102c76e9.json",
+			"jsonFile" : "toolchains-v1-4c884dfc026eee41a838.json",
 			"kind" : "toolchains",
 			"version" : 
 			{
@@ -90,7 +90,7 @@
 				"responses" : 
 				[
 					{
-						"jsonFile" : "cache-v2-51fac00511133ac6b8fc.json",
+						"jsonFile" : "cache-v2-457868bcb69a30f1e071.json",
 						"kind" : "cache",
 						"version" : 
 						{
@@ -108,7 +108,7 @@
 						}
 					},
 					{
-						"jsonFile" : "toolchains-v1-ca5f28d50d58102c76e9.json",
+						"jsonFile" : "toolchains-v1-4c884dfc026eee41a838.json",
 						"kind" : "toolchains",
 						"version" : 
 						{
@@ -117,7 +117,7 @@
 						}
 					},
 					{
-						"jsonFile" : "cmakeFiles-v1-faf6bbdb2e294852457b.json",
+						"jsonFile" : "cmakeFiles-v1-654e89120261d5a735e9.json",
 						"kind" : "cmakeFiles",
 						"version" : 
 						{

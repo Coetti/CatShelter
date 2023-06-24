@@ -10,13 +10,14 @@
 				{
 					"includeDirectories" : 
 					[
-						"C:/MinGW/lib/gcc/mingw32/5.1.0/include",
+						"C:/MinGW/lib/gcc/mingw32/6.3.0/include",
 						"C:/MinGW/include",
-						"C:/MinGW/lib/gcc/mingw32/5.1.0/include-fixed"
+						"C:/MinGW/lib/gcc/mingw32/6.3.0/include-fixed",
+						"C:/MinGW/mingw32/include"
 					],
 					"linkDirectories" : 
 					[
-						"C:/MinGW/lib/gcc/mingw32/5.1.0",
+						"C:/MinGW/lib/gcc/mingw32/6.3.0",
 						"C:/MinGW/lib/gcc",
 						"C:/MinGW/mingw32/lib",
 						"C:/MinGW/lib"
@@ -28,7 +29,6 @@
 						"gcc",
 						"moldname",
 						"mingwex",
-						"pthread",
 						"advapi32",
 						"shell32",
 						"user32",
@@ -40,7 +40,7 @@
 					]
 				},
 				"path" : "gcc",
-				"version" : "5.1.0"
+				"version" : "6.3.0"
 			},
 			"language" : "C",
 			"sourceFileExtensions" : 

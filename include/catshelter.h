@@ -16,4 +16,5 @@ void adminPanel();
 void menu();
 void limpaTela();
 void desenhaGato();
+void pressioneParaVoltar();
 #endif

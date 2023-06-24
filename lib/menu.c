@@ -20,10 +20,16 @@
         printf("\\     /_/  \n");
     }
 
+    void pressioneParaVoltar(){
+        getchar();
+        printf("\nAperte qualquer tecla para voltar!!\n");
+        getchar();
+    }
+
     void menu(ListaCDE* lista){
         unsigned int opc;
-        Gato* gato;
-        extern Arquivos arq;  // Declare a variável externa para acessá-la
+        //extern Arquivos arq;  // Declare a variável externa para acessá-la
+
         limpaTela();
         printf("-----------------------------------\n");
         desenhaGato();
@@ -41,11 +47,7 @@
                     menuGato(lista);
                     break;
                 case 2:
-                
-                    gato = getGatos(lista,arq);
-                    for(int i; i<10; i++){
-                        printf("\nvalores lidos na funcao ler dentro da menu>>>%u, %s", gato[i].id, gato[i].nome);
-                    }
+                    menuGato(lista);
                     break;
                 case 3:
                     menuGato(lista);

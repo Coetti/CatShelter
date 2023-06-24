@@ -6,7 +6,7 @@
 		},
 		{
 			"isGenerated" : true,
-			"path" : "build/CMakeFiles/3.27.0-rc3/CMakeSystem.cmake"
+			"path" : "build/CMakeFiles/3.27.0-rc2/CMakeSystem.cmake"
 		},
 		{
 			"isCMake" : true,
@@ -20,7 +20,7 @@
 		},
 		{
 			"isGenerated" : true,
-			"path" : "build/CMakeFiles/3.27.0-rc3/CMakeCCompiler.cmake"
+			"path" : "build/CMakeFiles/3.27.0-rc2/CMakeCCompiler.cmake"
 		},
 		{
 			"isCMake" : true,
@@ -84,7 +84,7 @@
 		},
 		{
 			"isGenerated" : true,
-			"path" : "build/CMakeFiles/3.27.0-rc3/CMakeRCCompiler.cmake"
+			"path" : "build/CMakeFiles/3.27.0-rc2/CMakeRCCompiler.cmake"
 		},
 		{
 			"isCMake" : true,
