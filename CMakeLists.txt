@@ -12,13 +12,15 @@ set(SOURCES
     lib/gatos.c
     lib/listacde.c 
     lib/login.c
-    lib/adminpanel.c 
+    lib/adminpanel.c
+    lib/adocao.c  
 )
 
 # Adicione os arquivos de header
 set(HEADERS
     include/gatos.h
     include/catshelter.h
+    include/adocao.h
 )
 
 # Adicione o executável principal

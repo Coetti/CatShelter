@@ -6,6 +6,7 @@
     #include <stdlib.h>
     #include "catshelter.h"
     #include "gatos.h"
+    #include "adocao.h"
 
     void limpaTela(){
         printf("\033[2J");
@@ -50,7 +51,7 @@
                     menuGato(lista);
                     break;
                 case 3:
-                    menuGato(lista);
+                    menuAdocao(lista);
                     break;
                 case 4:
                     limpaTela();

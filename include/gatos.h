@@ -51,6 +51,7 @@ Gato* procuraNome(ListaCDE *l, char nomeProcurado[]);
 int procuraID(ListaCDE *l, unsigned int id);
 int retira(ListaCDE *l, unsigned int id);
 int atualiza(ListaCDE *l, unsigned int id, int filtro);
+Gato atualizaAdocao(ListaCDE *l, unsigned int id);
 unsigned int ultimoID(ListaCDE *l);
 
 

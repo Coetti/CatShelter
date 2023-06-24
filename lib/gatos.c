@@ -8,6 +8,7 @@ LOCAL: PUCMINAS - POCOS DE CALDAS*/
 #include <ctype.h>
 #include "gatos.h"
 #include "catshelter.h"
+#include "adocao.h"
 
 void menuGato(ListaCDE* lista) {
     int opcao = 0;
@@ -512,7 +513,35 @@ int atualiza(ListaCDE *l, unsigned int id, int filtro){
     return 0;
 }
 
+Gato atualizaAdocao(ListaCDE *l, unsigned int id){
+    No* aux;
+    Gato gatoAdotado;
+    if(estaVazia(*l) == 1){
+        printf("Lista vazia");
+        pressioneParaVoltar();
+        menuAdocao(l);
+    }
+
+    aux = l->inicio;
+
+    do{
+        if(aux->dados.id == id){
+
+            aux->dados.adocao = "N";
+            gatoAdotado = aux->dados;
+        }
+        aux = aux->prox;
+    }while(aux != l->inicio);
+
+    return gatoAdotado;
+}
+
 unsigned int ultimoID(ListaCDE *l){
+
+    if(estaVazia(*l) == 1){
+        unsigned int ultimoID = 1;
+        return ultimoID; 
+    }
     unsigned int ultimoID = l->fim->dados.id;
     return ultimoID; 
 }

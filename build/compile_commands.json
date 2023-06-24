@@ -34,5 +34,11 @@
   "command": "gcc  @CMakeFiles/catshelter.dir/includes_C.rsp  -Wall -g -Wall -Wextra -pedantic -o CMakeFiles\\catshelter.dir\\lib\\adminPanel.c.obj -c C:\\CatShelter\\lib\\adminPanel.c",
   "file": "C:/CatShelter/lib/adminPanel.c",
   "output": "CMakeFiles/catshelter.dir/lib/adminPanel.c.obj"
+},
+{
+  "directory": "C:/CatShelter/build",
+  "command": "gcc  @CMakeFiles/catshelter.dir/includes_C.rsp  -Wall -g -Wall -Wextra -pedantic -o CMakeFiles\\catshelter.dir\\lib\\adocao.c.obj -c C:\\CatShelter\\lib\\adocao.c",
+  "file": "C:/CatShelter/lib/adocao.c",
+  "output": "CMakeFiles/catshelter.dir/lib/adocao.c.obj"
 }
 ]
