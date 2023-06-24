@@ -65,9 +65,8 @@ int freeLista(ListaCDE *l);
 
 //relacionadas ao arquivo
 //int lerQtdGatos(Arquivos arq);
-Gato abreArquivoGatosLer(Arquivos arq);
-void abreArquivoGatosEscrever(Arquivos arq, Gato gato);
+int abreArquivoGatosLer(Arquivos arq, Gato *gato);
+void abreArquivoGatosEscrever(Arquivos arq, ListaCDE* l);
 int getGatos(Arquivos arq, ListaCDE *l);
-void escreverGatos(Arquivos arq, ListaCDE* l);
 
 #endif

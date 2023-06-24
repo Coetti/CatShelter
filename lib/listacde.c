@@ -51,8 +51,6 @@ int insere(ListaCDE *l, Gato dados){
 }
 
 
-
-
 int estaVazia(ListaCDE l){
 
     if(l.inicio == NULL)
