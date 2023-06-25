@@ -6,3 +6,4 @@ Makefile
 catshelter.exe
 *.exe
 build/
+.vscode/
