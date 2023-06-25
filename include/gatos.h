@@ -4,6 +4,7 @@
 
 #ifndef GATOS_H
 #define GATOS_H
+#include <stdio.h>
 typedef struct{
 
     unsigned int id;
@@ -34,8 +35,15 @@ typedef struct ListaCDE{
     int tam;
 } ListaCDE;
 
+typedef struct Arquivos{
+    FILE *f;
+    char bancoGatos[100];
+    char bancoDoacoes[100];
+}Arquivos;
+
+
 void menuGato(ListaCDE *lista);
-Gato createGato();
+Gato createGato(unsigned int novoID);
 int insereOrdenado(ListaCDE *l, Gato dados);
 void exibeGato(Gato);
 void mostra(ListaCDE *l, int filtro);
@@ -43,6 +51,8 @@ Gato* procuraNome(ListaCDE *l, char nomeProcurado[]);
 int procuraID(ListaCDE *l, unsigned int id);
 int retira(ListaCDE *l, unsigned int id);
 int atualiza(ListaCDE *l, unsigned int id, int filtro);
+Gato atualizaAdocao(ListaCDE *l, unsigned int id);
+unsigned int ultimoID(ListaCDE *l);
 
 
 void cria(ListaCDE *l);
@@ -51,5 +61,12 @@ int estaVazia(ListaCDE l);
 Gato getInicio(ListaCDE l);
 Gato getFim(ListaCDE l);
 int getTamanho(ListaCDE l);
+int freeLista(ListaCDE *l);
+
+//relacionadas ao arquivo
+//int lerQtdGatos(Arquivos arq);
+int abreArquivoGatosLer(Arquivos arq, Gato *gato);
+void abreArquivoGatosEscrever(Arquivos arq, ListaCDE* l);
+int getGatos(Arquivos arq, ListaCDE *l);
 
 #endif

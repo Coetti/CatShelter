@@ -1,9 +1,10 @@
+/*IMPLEMENTACAO DO LOGIN*/
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include "header.h"
+#include "catshelter.h"
 
-void login(){
+void login(ListaCDE* lista){
     char username[60];
     char password[60];
     int max_tentativas = 0;
@@ -29,7 +30,7 @@ void login(){
     if(role == 2)
         adminPanel();
     if(role == 1)
-        menu();
+        menu(lista);
     
     printf("\n\nTentativas maximas atingidas...Saindo!!!");
     exit(0);
@@ -40,8 +41,8 @@ void login(){
 /* Verifica se o login do usuario/senha estao corretos */
 
 int verificaLogin(char *username, char *password){
-    char filename[30] = "src/database/users.txt";
-    FILE *f;
+    char filename[100] = "C:\\CatShelter\\database\\users.txt";
+    FILE* f;
     char user[120]; 
     char linha[120];
     char admin[20] = "adminadmin"; 

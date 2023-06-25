@@ -10,8 +10,12 @@ LOCAL: PUCMINAS - POCOS DE CALDAS*/
 #include "catshelter.h"
 #include "gatos.h"
 
+
+
 int main() {
+    
     ListaCDE lista;
+    //login(&lista);
     cria(&lista); 
     menu(&lista);
     return 0;

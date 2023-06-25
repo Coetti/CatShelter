@@ -2,7 +2,9 @@
     "files.associations": {
         "stdlib.h": "c",
         "stdio.h": "c",
-        "listacde.h": "c"
+        "listacde.h": "c",
+        "catshelter.h": "c",
+        "gatos.h": "c"
     }
 
 }
