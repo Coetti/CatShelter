@@ -7,6 +7,7 @@
     #include "catshelter.h"
     #include "gatos.h"
     #include "adocao.h"
+    #include "doacoes.h"
 
     void limpaTela(){
         printf("\033[2J");
@@ -29,7 +30,6 @@
 
     void menu(ListaCDE* lista){
         unsigned int opc;
-        //extern Arquivos arq;  // Declare a variável externa para acessá-la
 
         limpaTela();
         printf("-----------------------------------\n");
@@ -48,7 +48,7 @@
                     menuGato(lista);
                     break;
                 case 2:
-                    menuGato(lista);
+                    menuDoacao(lista);
                     break;
                 case 3:
                     menuAdocao(lista);
@@ -65,6 +65,6 @@
                 printf("Opcao invalida. Tente novamente.\n");
                     break;    
             }
-        }while (opc != 6);        
+        }while (opc != 4);        
     }
 

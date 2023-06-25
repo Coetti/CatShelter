@@ -26,6 +26,7 @@ void menuGato(ListaCDE* lista) {
     }
     
     do {
+        limpaTela();
         printf("-----------------------------------\n");
         desenhaGato();
         printf("\nSelecione uma opcao:\n");
@@ -82,7 +83,7 @@ void menuGato(ListaCDE* lista) {
                     printf("8 - Comorbidades /// 9 - Observação /// 10 - Data de Entrada /// 11 - Data de Adocao\n");
                     printf("Escolha o campo que deseja atualizar\n");
                     scanf("%d", &filtro);
-                    if(atualiza(lista, id, filtro)){
+                    if(atualiza(lista, id, filtro)==1){
                         printf("Dados atualizados com sucesso!");
                         abreArquivoGatosEscrever(arq, lista);
                     }
@@ -104,7 +105,7 @@ void menuGato(ListaCDE* lista) {
                 pressioneParaVoltar();
                 break;
             case 6:
-                menu();
+                menu(lista);
                 break;
             default:
                 printf("Opcao invalida. Tente novamente.\n");
@@ -420,6 +421,7 @@ int atualiza(ListaCDE *l, unsigned int id, int filtro){
     
     if (l->inicio == NULL) {
         printf("\nSem gatos registrados!\n");
+        system("pause");
     }
 
     aux = l->inicio;
@@ -598,10 +600,6 @@ int getGatos(Arquivos arq, ListaCDE *l) {
         insereOrdenado(l, gato); 
     }
 
-    if (resultado == 0) {
-        printf("Erro na leitura do arquivo.\n");
-    }
-
     fclose(arq.f);
     return 1;
 }
@@ -666,28 +664,3 @@ int abreArquivoGatosLer(Arquivos arq, Gato *gato) {
 
     return 1;
 }
-
-
-/*
-int abreArquivoGatosLer(Arquivos arq, Gato *gato){
-    int result;
-    fscanf(arq.f, "%u", &gato.id);
-    fscanf(arq.f, "%s", gato.nome);
-    fscanf(arq.f, " %c", &gato.adocao);
-    fscanf(arq.f, "%u", &gato.idade);
-    fscanf(arq.f, "%s", gato.raca);
-    fscanf(arq.f, "%s", gato.pelagem);
-    fscanf(arq.f, "%d", &gato.numVacinas);
-
-    for (int i = 0; i < gato.numVacinas; i++) {
-        fscanf(arq.f, "%s", gato.vacinas[i]);
-    }
-
-    fscanf(arq.f, " %c", &gato.castrado);
-    fscanf(arq.f, "%s", gato.comorbidades);
-    fscanf(arq.f, "%s", gato.obs);
-    fscanf(arq.f, "%s", gato.dataDeEntrada);
-    fscanf(arq.f, "%s", gato.dataDeAdocao);
-
-    return gato;
-}*/

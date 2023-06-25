@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include "catshelter.h"
 
-void login(){
+void login(ListaCDE* lista){
     char username[60];
     char password[60];
     int max_tentativas = 0;
@@ -30,7 +30,7 @@ void login(){
     if(role == 2)
         adminPanel();
     if(role == 1)
-        menu();
+        menu(lista);
     
     printf("\n\nTentativas maximas atingidas...Saindo!!!");
     exit(0);

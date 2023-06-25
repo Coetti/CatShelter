@@ -10,10 +10,10 @@ LOCAL: PUCMINAS - POCOS DE CALDAS*/
 
 
 //definicoes e prototipos
-void login();
+void login(ListaCDE* lista);
 int verificaLogin(char *, char *);
 void adminPanel();
-void menu();
+void menu(ListaCDE* lista);
 void limpaTela();
 void desenhaGato();
 void pressioneParaVoltar();

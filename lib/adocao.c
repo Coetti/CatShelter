@@ -39,7 +39,7 @@ void menuAdocao(ListaCDE *l) {
                 pressioneParaVoltar();
                 break;
             case 3:
-                menu();
+                menu(l);
                 break;
             default:
                 printf("Opcao invalida. Tente novamente.\n");
@@ -154,26 +154,28 @@ void criaArquivo(Arquivos arq, Gato gatoAdotado, Adotante tutor){
     if(arq.f == NULL){
         printf("Erro ao criar o arquivo!!\n");
     }
-    fprintf(arq.f, ">>>FICHA DE ADOCAO>><<CATSHELTER<<<\n");
-    fprintf(arq.f, "NOME: %s\n", tutor.nome);
-    fprintf(arq.f, "TELEFONE: %s\t\n", tutor.telefone);
+    fprintf(arq.f, "------------------------->>>FICHA DE ADOCAO>><<CATSHELTER<<<-------------------------\n\n");
+    fprintf(arq.f, "NOME: %s\t", tutor.nome);
+    fprintf(arq.f, "TELEFONE: %s", tutor.telefone);
     fprintf(arq.f, "CPF: %s\t", tutor.CPF);
     fprintf(arq.f, "RG: %s\n", tutor.RG);
-    fprintf(arq.f, "ENDERECO: %s NUMERO: %s - BAIRRO: %s - CIDADE: %s - %s\n\n", tutor.rua, tutor.numero, tutor.bairro, tutor.cidade, tutor.estado);
-
+    fprintf(arq.f, "ENDERECO: %s NUMERO: %s - BAIRRO: %s - CIDADE: %s - %s\n", tutor.rua, tutor.numero, tutor.bairro, tutor.cidade, tutor.estado);
+    fprintf(arq.f, "\n\n");
     fprintf(arq.f, "ID: %u\t", gatoAdotado.id);
-    fprintf(arq.f, "NOME: %s\t", gatoAdotado.nome);
-    fprintf(arq.f, "IDADE%u\t\n", gatoAdotado.idade);
+    fprintf(arq.f, "NOME: %s\n", gatoAdotado.nome);
+    fprintf(arq.f, "IDADE: %u\t", gatoAdotado.idade);
     fprintf(arq.f, "RACA: %s\t", gatoAdotado.raca);
-    fprintf(arq.f, "PELAGEM: %s\t", gatoAdotado.pelagem);
+    fprintf(arq.f, "PELAGEM: %s\t\n", gatoAdotado.pelagem);
 
     for (int j = 0; j < gatoAdotado.numVacinas; j++) {
-        fprintf(arq.f, "VACINA %d: %s\n", j, gatoAdotado.vacinas[j]);
+        fprintf(arq.f, "VACINA %d: %s\n", j+1, gatoAdotado.vacinas[j]);
     }
 
-    fprintf(arq.f, "%c\n", gatoAdotado.castrado);
-    fprintf(arq.f, "%s\n", gatoAdotado.comorbidades);
-    fprintf(arq.f, "%s\n", gatoAdotado.obs);
-    fprintf(arq.f, "%s\n", gatoAdotado.dataDeEntrada);
-    fprintf(arq.f, "%s\n", gatoAdotado.dataDeAdocao);
+    fprintf(arq.f, "CASTRADO: %c\n", gatoAdotado.castrado);
+    fprintf(arq.f, "COMORBIDADES: %s\n", gatoAdotado.comorbidades);
+    fprintf(arq.f, "OBSERVACOES: %s\n", gatoAdotado.obs);
+    fprintf(arq.f, "DATA DE ENTRADA: %s\t", gatoAdotado.dataDeEntrada);
+    fprintf(arq.f, "DATA DE ADOCAO: %s\n", gatoAdotado.dataDeAdocao);
+    fprintf(arq.f, "-------------------------CATSHELTER - TELEFONE: 19981355375-------------------------");
+    fclose(arq.f);
 }

@@ -13,8 +13,9 @@ LOCAL: PUCMINAS - POCOS DE CALDAS*/
 
 
 int main() {
-    //login();
+    
     ListaCDE lista;
+    //login(&lista);
     cria(&lista); 
     menu(&lista);
     return 0;
