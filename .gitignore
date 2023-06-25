@@ -5,3 +5,4 @@ CMakeScripts/
 Makefile
 catshelter.exe
 *.exe
+build/
