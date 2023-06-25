@@ -15,6 +15,7 @@
 ## Professores
 
 - Claudio Correa
+- Rafael Martins D´Addio
 
 ## Requisitos
 
